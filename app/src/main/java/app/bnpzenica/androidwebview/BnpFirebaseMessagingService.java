@@ -5,6 +5,8 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+/*import android.media.RingtoneManager;
+import android.net.Uri;*/
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
@@ -42,17 +44,18 @@ public class BnpFirebaseMessagingService extends FirebaseMessagingService {
         // sound
         //Uri defaultSoundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         // vibration
-        //long[] v = {500,1000};
+        long[] v = {500,1000};
 
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
-                .setDefaults(Notification.DEFAULT_ALL)
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setDefaults(Notification.DEFAULT_SOUND)
+                .setPriority(NotificationCompat.PRIORITY_MAX)
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentTitle(title)
                 .setContentText(messageBody)
                 .setAutoCancel(true)
                 .setContentIntent(pendingIntent)
-                .setShowWhen(true);
+                .setShowWhen(true)
+                .setVibrate(v);
 
 
         NotificationManager notificationManager =
