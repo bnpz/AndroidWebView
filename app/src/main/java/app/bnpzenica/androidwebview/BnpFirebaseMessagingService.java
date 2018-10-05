@@ -15,7 +15,7 @@ import com.google.firebase.messaging.RemoteMessage;
 
 public class BnpFirebaseMessagingService extends FirebaseMessagingService {
 
-    private static final String TAG = "DEBUG";
+    private static final String TAG = "NOTIF";
 
     public BnpFirebaseMessagingService() {
     }
@@ -49,7 +49,7 @@ public class BnpFirebaseMessagingService extends FirebaseMessagingService {
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
                 .setDefaults(Notification.DEFAULT_SOUND)
                 .setPriority(NotificationCompat.PRIORITY_MAX)
-                .setSmallIcon(R.mipmap.ic_launcher)
+                .setSmallIcon(R.mipmap.ic_launcher_bnp)
                 .setContentTitle(title)
                 .setContentText(messageBody)
                 .setAutoCancel(true)
