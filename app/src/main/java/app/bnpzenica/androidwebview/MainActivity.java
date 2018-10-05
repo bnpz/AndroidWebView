@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 
+import com.google.firebase.messaging.FirebaseMessaging;
+
 public class MainActivity extends AppCompatActivity {
 
     private WebView webView;
@@ -28,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
         // configure settings (JavaScript etc.)
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
+
+        FirebaseMessaging.getInstance().subscribeToTopic(Config.TOPIC_GENERAL);
     }
 
     /**
