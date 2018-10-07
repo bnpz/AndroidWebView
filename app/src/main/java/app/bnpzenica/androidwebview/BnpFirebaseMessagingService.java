@@ -25,19 +25,33 @@ public class BnpFirebaseMessagingService extends FirebaseMessagingService {
     }
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
-        String title = remoteMessage.getNotification().getTitle();
+
+        BnpFirebaseRemoteMessage message = new BnpFirebaseRemoteMessage(remoteMessage);
+
+       /* String title = remoteMessage.getNotification().getTitle();
         String message = remoteMessage.getNotification().getBody();
         Log.e(TAG, "onMessageReceived: Message Received: \n" +
                 "Title: " + title + "\n" +
                 "Message: " + message);
 
-        Log.e(TAG, remoteMessage.getData().get("key_1"));
+        //Log.e(TAG, remoteMessage.getData().get("key_1"));*/
+
+        Log.e(TAG, "onMessageReceived: Message Received: \n" +
+                "Title: " + message.getTitle() + "\n" +
+                "Message: " + message.getContent() + "\n" +
+                "Produkcija: " + message.getProductionSegment() + "\n" +
+                "Int: " + message.getUrlInternal() + "\n" +
+                "ext: " + message.getUrlExternal() + "\n"
+
+        );
+
+
 
         //sendNotification(title,message);
-        sendBasicNotification(title,message);
+        //sendBasicNotification(title,message);
     }
 
-    private void sendBasicNotification(String title, String messageBody){
+    private void sendBasicNotification(String title, String content){
 
         // NOTIFICATION
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
@@ -49,7 +63,7 @@ public class BnpFirebaseMessagingService extends FirebaseMessagingService {
 
         // TEXT CONTENT
         builder.setContentTitle(title);
-        builder.setContentText(messageBody);
+        builder.setContentText(content);
         builder.setSubText("SUB TEXT"); // appears under the text on newer devices.
         builder.setShowWhen(true);
 
