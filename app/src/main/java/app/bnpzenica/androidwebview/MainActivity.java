@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
 
-        FirebaseMessaging.getInstance().subscribeToTopic(Config.TOPIC_GENERAL);
+        FirebaseMessaging.getInstance().subscribeToTopic(Config.TOPIC_DEVELOP); // todo: !!! RENAME TOPIC
     }
 
     /**
