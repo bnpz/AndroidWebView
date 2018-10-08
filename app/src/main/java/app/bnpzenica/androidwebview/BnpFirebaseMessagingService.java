@@ -42,8 +42,8 @@ public class BnpFirebaseMessagingService extends FirebaseMessagingService {
 
         builder.setAutoCancel(true);
         builder.setPriority(NotificationCompat.PRIORITY_MAX);
-        builder.setSmallIcon(R.drawable.ic_bnp_notification);
         builder.setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher_bnp_round));
+        builder.setSmallIcon(R.drawable.ic_bnp_notification);
 
         // SOUND
         Uri defaultSoundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
@@ -51,7 +51,7 @@ public class BnpFirebaseMessagingService extends FirebaseMessagingService {
 
         // TEXT CONTENT
         builder.setContentTitle(message.getTitle());
-        builder.setContentText(message.getContent());
+        builder.setContentText(message.getContent() + message.getUrl());
         builder.setSubText(message.getProductionSegment()); // appears under the text on newer devices.
         builder.setShowWhen(true);
 
