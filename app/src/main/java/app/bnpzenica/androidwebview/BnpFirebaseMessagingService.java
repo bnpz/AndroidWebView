@@ -47,7 +47,7 @@ public class BnpFirebaseMessagingService extends FirebaseMessagingService {
         builder.setPriority(NotificationCompat.PRIORITY_MAX);
         builder.setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher_bnp_round));
         builder.setColor(getResources().getColor(R.color.colorPrimary));
-        builder.setSmallIcon(R.drawable.ic_bnp_notification);
+        builder.setSmallIcon(R.drawable.ic_notification_one);
 
 
         // SOUND

@@ -15,9 +15,20 @@
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <!-- Google Deep Links -->
+            <intent-filter android:label="BNP Zenica">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <!-- Accepts URIs that begin with "http://www.example.com/gizmos” -->
+                <data android:scheme="http"
+                    android:host="www.bnp.ba"
+                    android:pathPrefix="/bnp" />
+                <!-- note that the leading "/" is required for pathPrefix-->
+            </intent-filter>
+
         </activity>
 
         <service android:name=".BnpFirebaseInstanceIdService">
@@ -34,7 +45,7 @@
 
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
-            android:resource="@drawable/ic_bnp_notification" />
+            android:resource="@drawable/ic_notification_one" />
 
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
