@@ -5,13 +5,10 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-/*import android.media.RingtoneManager;
-import android.net.Uri;*/
 import android.graphics.BitmapFactory;
+import android.media.RingtoneManager;
 import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
-import android.util.Log;
-import android.view.View;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
@@ -28,30 +25,17 @@ public class BnpFirebaseMessagingService extends FirebaseMessagingService {
 
         BnpFirebaseRemoteMessage message = new BnpFirebaseRemoteMessage(remoteMessage);
 
-       /* String title = remoteMessage.getNotification().getTitle();
-        String message = remoteMessage.getNotification().getBody();
-        Log.e(TAG, "onMessageReceived: Message Received: \n" +
-                "Title: " + title + "\n" +
-                "Message: " + message);
+        /*Log.e(TAG, "onMessageReceived: Message Received: \n" +
+                "Title: " +         message.getTitle() + "\n" +
+                "Message: " +       message.getContent() + "\n" +
+                "Produkcija: " +    message.getProductionSegment() + "\n" +
+                "Url: " +           message.getUrl() + "\n"
+        );*/
 
-        //Log.e(TAG, remoteMessage.getData().get("key_1"));*/
-
-        Log.e(TAG, "onMessageReceived: Message Received: \n" +
-                "Title: " + message.getTitle() + "\n" +
-                "Message: " + message.getContent() + "\n" +
-                "Produkcija: " + message.getProductionSegment() + "\n" +
-                "Int: " + message.getUrlInternal() + "\n" +
-                "ext: " + message.getUrlExternal() + "\n"
-
-        );
-
-
-
-        //sendNotification(title,message);
-        //sendBasicNotification(title,message);
+        sendBasicNotification(message);
     }
 
-    private void sendBasicNotification(String title, String content){
+    private void sendBasicNotification(BnpFirebaseRemoteMessage message){
 
         // NOTIFICATION
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
@@ -61,15 +45,27 @@ public class BnpFirebaseMessagingService extends FirebaseMessagingService {
         builder.setSmallIcon(R.drawable.ic_bnp_notification);
         builder.setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher_bnp_round));
 
+        // SOUND
+        Uri defaultSoundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        builder.setSound(defaultSoundUri);
+
         // TEXT CONTENT
-        builder.setContentTitle(title);
-        builder.setContentText(content);
-        builder.setSubText("SUB TEXT"); // appears under the text on newer devices.
+        builder.setContentTitle(message.getTitle());
+        builder.setContentText(message.getContent());
+        builder.setSubText(message.getProductionSegment()); // appears under the text on newer devices.
         builder.setShowWhen(true);
 
         // TAP ACTION
-        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://developer.android.com/reference/android/app/Notification.html"));
-        PendingIntent pendingIntent  = PendingIntent.getActivity(this, 0, intent, 0);
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+        // add notification action url to intent
+        String notificationUrl = message.getUrl();
+        intent.putExtra("url", notificationUrl);
+
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
+                PendingIntent.FLAG_ONE_SHOT);
+
         builder.setContentIntent(pendingIntent);
 
         // SEND NOTIFICATION
