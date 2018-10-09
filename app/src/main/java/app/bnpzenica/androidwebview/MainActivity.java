@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         webSettings.setJavaScriptEnabled(true);
 
         // Subscribe to notification topic
-        FirebaseMessaging.getInstance().subscribeToTopic(Config.TOPIC_GENERAL); // todo: !!! RENAME TOPIC for dev/production
+        FirebaseMessaging.getInstance().subscribeToTopic(Config.TOPIC_DEVELOP); // todo: !!! RENAME TOPIC for dev/production
     }
 
     /**
