@@ -9,6 +9,9 @@ public class BnpWebViewClient extends WebViewClient {
         if(url.contains("/bnp")){
             return false;
         }
+        else if(url.contains("/festival")){
+            return false;
+        }
         else{
             // todo: load in external app (Chrome)
             return true;

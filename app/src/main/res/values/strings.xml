@@ -1,4 +1,4 @@
 <!-- todo: Change name for production version -->
 <resources>
-    <string name="app_name">BNP Zenica - DEV</string>
+    <string name="app_name">BNP Zenica</string>
 </resources>
